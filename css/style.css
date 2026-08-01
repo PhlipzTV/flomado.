@@ -308,7 +308,23 @@ a { color: inherit; }
 .poster .swatches i:nth-child(3) { background: var(--paper-dim); }
 .poster small { font-size: 0.78rem; color: #6b6156; }
 
-/* ---------- Discography / reel ---------- */
+/* ---------- Discography / top tracks ---------- */
+.track-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 12px;
+}
+.track-card {
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--ink-soft);
+  line-height: 0;
+}
+.track-card iframe { display: block; border: none; }
+
+/* Discography / reel */
 .reel {
   display: flex;
   gap: 2px;
@@ -439,12 +455,14 @@ a { color: inherit; }
   .deck-stage { order: -1; margin-bottom: 20px; }
   .dj-grid { grid-template-columns: 1fr; }
   .wall { grid-template-columns: 1fr 1fr; }
+  .track-grid { grid-template-columns: 1fr 1fr; }
   .about { grid-template-columns: 1fr; }
   .fl-links { display: none; }
   .fl-burger { display: flex; }
 }
 @media (max-width: 640px) {
   .wall { grid-template-columns: 1fr; }
+  .track-grid { grid-template-columns: 1fr; }
   .contact-form { grid-template-columns: 1fr; }
   .section-head { flex-direction: column; align-items: flex-start; }
   .section-note { text-align: left; }
