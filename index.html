@@ -23,10 +23,10 @@
   </button>
 </nav>
 
-<main>
-
-  <section class="hero">
-    <div>
+<div class="intro" id="intro">
+  <div class="intro-pin">
+    <div class="intro-flash" aria-hidden="true"></div>
+    <div class="intro-copy">
       <p class="hero-tag">dj · grafik · bewegtbild</p>
       <h1>alles<br /><em>flomado.</em></h1>
       <p class="hero-lead">
@@ -40,9 +40,12 @@
     </div>
     <div class="deck-stage">
       <canvas id="vinyl-canvas"></canvas>
-      <p class="deck-hint">zieh die platte</p>
     </div>
-  </section>
+    <p class="intro-hint">scroll rein · platte lässt sich ziehen</p>
+  </div>
+</div>
+
+<main>
 
   <div class="ticker">
     <div class="ticker-track">
@@ -88,21 +91,21 @@
       <p class="section-note">Vom Konzept bis zur druckfertigen Datei — individuell für Gig, Release oder Treffen.</p>
     </div>
     <div class="wall">
-      <div class="poster reveal">
+      <div class="poster poster-1 reveal">
         <div>
           <p class="kicker">line-up</p>
           <h3>konzert-<br />poster</h3>
         </div>
         <div><div class="swatches"><i></i><i></i><i></i></div><small>Datum · Location · Artists</small></div>
       </div>
-      <div class="poster reveal">
+      <div class="poster poster-2 reveal">
         <div>
           <p class="kicker">digital & print</p>
           <h3>event-<br />flyer</h3>
         </div>
         <div><div class="swatches"><i></i><i></i><i></i></div><small>Story-Format inklusive</small></div>
       </div>
-      <div class="poster reveal">
+      <div class="poster poster-3 reveal">
         <div>
           <p class="kicker">release</p>
           <h3>merch &<br />cover</h3>
@@ -201,6 +204,7 @@
 </footer>
 
 <script src="js/vinyl.js"></script>
+<script src="js/scroll-intro.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

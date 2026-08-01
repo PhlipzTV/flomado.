@@ -18,7 +18,7 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; overflow-x: hidden; }
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
@@ -91,15 +91,49 @@ a { color: inherit; }
 }
 .fl-burger span { width: 24px; height: 2px; background: var(--paper); }
 
-/* ---------- Hero ---------- */
-.hero {
-  min-height: 100svh;
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  align-items: center;
-  gap: var(--gap);
-  padding: 120px var(--edge) 60px;
+/* ---------- Intro (scroll-driven zoom into the record) ---------- */
+.intro {
   position: relative;
+  height: 280vh;
+}
+.intro-pin {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(28px, 5vw, 48px);
+  padding: 110px var(--edge) 70px;
+  text-align: center;
+}
+.intro-flash {
+  position: absolute;
+  inset: -25%;
+  background: radial-gradient(circle at 50% 50%, var(--orange) 0%, rgba(255, 90, 31, 0.55) 38%, transparent 70%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.intro-copy {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+}
+.intro-copy .hero-cta { justify-content: center; }
+.intro-hint {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--paper-dim);
+  white-space: nowrap;
 }
 .hero-tag {
   font-size: 0.78rem;
@@ -155,24 +189,14 @@ a { color: inherit; }
 /* Turntable */
 .deck-stage {
   position: relative;
+  z-index: 1;
   aspect-ratio: 1 / 1;
-  width: min(460px, 90vw);
-  justify-self: center;
+  width: min(420px, 68vw);
   touch-action: none;
+  will-change: transform;
 }
 #vinyl-canvas { width: 100%; height: 100%; display: block; cursor: grab; }
 #vinyl-canvas:active { cursor: grabbing; }
-.deck-hint {
-  position: absolute;
-  bottom: -34px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.72rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--paper-dim);
-  white-space: nowrap;
-}
 
 /* ---------- Ticker ---------- */
 .ticker {
@@ -262,15 +286,16 @@ a { color: inherit; }
   padding: 4px 12px;
 }
 
-/* ---------- Poster wall ---------- */
+/* ---------- Poster wall: 1:1 tiles, staggered side by side ---------- */
 .wall {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
+  gap: 32px;
   padding-top: 10px;
+  align-items: start;
 }
 .poster {
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 1 / 1;
   background: var(--paper);
   color: var(--ink);
   border-radius: 2px;
@@ -280,10 +305,11 @@ a { color: inherit; }
   justify-content: space-between;
   box-shadow: 0 24px 50px -20px rgba(0,0,0,0.6);
   transform: rotate(var(--tilt, -3deg));
-  transition: transform 0.35s cubic-bezier(.2,.8,.2,1), box-shadow 0.35s ease;
+  transition: transform 0.35s cubic-bezier(.2,.8,.2,1), box-shadow 0.35s ease, margin-top 0.35s ease;
 }
-.poster:nth-child(2) { --tilt: 2deg; }
-.poster:nth-child(3) { --tilt: -1.5deg; }
+.poster-1 { --tilt: -2.5deg; margin-top: 0; }
+.poster-2 { --tilt: 2deg; margin-top: 72px; }
+.poster-3 { --tilt: -1.5deg; margin-top: 24px; }
 .poster:hover { transform: rotate(0deg) translateY(-10px); box-shadow: 0 32px 60px -18px rgba(255,90,31,0.35); }
 .poster .kicker {
   font-size: 0.68rem;
@@ -451,19 +477,26 @@ a { color: inherit; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 980px) {
-  .hero { grid-template-columns: 1fr; padding-top: 140px; }
-  .deck-stage { order: -1; margin-bottom: 20px; }
+  .intro { height: 240vh; }
+  .intro-pin { padding-top: 90px; }
   .dj-grid { grid-template-columns: 1fr; }
   .wall { grid-template-columns: 1fr 1fr; }
+  .poster-2 { margin-top: 56px; }
   .track-grid { grid-template-columns: 1fr 1fr; }
   .about { grid-template-columns: 1fr; }
   .fl-links { display: none; }
   .fl-burger { display: flex; }
 }
 @media (max-width: 640px) {
+  .intro { height: 200vh; }
   .wall { grid-template-columns: 1fr; }
+  .poster-1, .poster-2, .poster-3 { margin-top: 0; }
   .track-grid { grid-template-columns: 1fr; }
   .contact-form { grid-template-columns: 1fr; }
   .section-head { flex-direction: column; align-items: flex-start; }
   .section-note { text-align: left; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .intro { height: auto; }
+  .intro-pin { position: relative; height: 100svh; }
 }
