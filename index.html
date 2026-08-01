@@ -4,218 +4,171 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>flomado. — DJ · Posterdesign · Film</title>
-<meta name="description" content="flomado. — DJ für deinen Gig, Posterdesign für Events und eigene Musik- & Filmprojekte. Buchbar, kreativ, unverwechselbar." />
+<meta name="description" content="flomado. — DJ für deinen Gig, Posterdesign für Events und eigene Musik- & Filmprojekte." />
 <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-<div id="bg-canvas-container"><canvas id="bg-canvas"></canvas></div>
-
-<header class="site-header">
-  <div class="container header-inner">
-    <a href="#" class="logo"><span class="logo-mark">flomado.</span></a>
-    <nav class="main-nav">
-      <a href="#dj">DJ Booking</a>
-      <a href="#design">Posterdesign</a>
-      <a href="#discography">Discography</a>
-      <a href="#ueber">Über mich</a>
-      <a href="#kontakt" class="nav-cta">Kontakt</a>
-    </nav>
-    <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</header>
+<nav class="fl-nav">
+  <a href="#" class="mark">flomado.</a>
+  <ul class="fl-links">
+    <li><a href="#dj">dj booking</a></li>
+    <li><a href="#design">posterdesign</a></li>
+    <li><a href="#discography">discography</a></li>
+    <li><a href="#ueber">über mich</a></li>
+    <li><a href="#kontakt">kontakt</a></li>
+  </ul>
+  <button class="fl-burger" aria-label="Menü öffnen" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
 
 <main>
 
   <section class="hero">
-    <div class="container hero-inner">
-      <div class="hero-copy">
-        <p class="eyebrow">DJ · Grafik · Bewegtbild</p>
-        <h1>Musik, die trägt.<br />Design, das bleibt. <span class="grad">flomado.</span></h1>
-        <p class="hero-lead">
-          Ich bin flomado. — DJ, der Sets für Booking bereithält, Grafiker, der Poster für Gigs
-          und Events gestaltet, und Filmemacher in Ausbildung, der demnächst eigene Kurzfilme
-          veröffentlicht. Alles an einem Ort: Booking, Design, Discography.
-        </p>
-        <div class="hero-actions">
-          <a href="#kontakt" class="btn btn-primary">Für einen Gig buchen</a>
-          <a href="#design" class="btn btn-ghost">Poster in Auftrag geben</a>
-        </div>
-        <p class="hero-hint">Ziehe den Kern im Bild — er reagiert auf dich.</p>
-      </div>
-      <div class="hero-visual">
-        <div class="orb-frame"><canvas id="hero-canvas"></canvas></div>
+    <div>
+      <p class="hero-tag">dj · grafik · bewegtbild</p>
+      <h1>alles<br /><em>flomado.</em></h1>
+      <p class="hero-lead">
+        Buch mich für deinen Gig, lass dir ein Poster designen, oder hör rein, was schon
+        läuft — Sets, Tracks und bald erste Kurzfilme, alles an einem Ort.
+      </p>
+      <div class="hero-cta">
+        <a href="#kontakt" class="btn btn-solid">gig buchen</a>
+        <a href="#design" class="btn btn-outline">poster anfragen</a>
       </div>
     </div>
-    <div class="scroll-cue"><span></span></div>
+    <div class="deck-stage">
+      <canvas id="vinyl-canvas"></canvas>
+      <p class="deck-hint">zieh die platte</p>
+    </div>
   </section>
 
-  <div class="marquee">
-    <div class="marquee-track">
-      <span>DJ SETS</span><span>POSTERDESIGN</span><span>EVENT FLYER</span><span>KURZFILME</span>
-      <span>DISCOGRAPHY</span><span>BOOKING</span>
-      <span>DJ SETS</span><span>POSTERDESIGN</span><span>EVENT FLYER</span><span>KURZFILME</span>
-      <span>DISCOGRAPHY</span><span>BOOKING</span>
+  <div class="ticker">
+    <div class="ticker-track">
+      <span>DJ SETS</span><span>POSTERDESIGN</span><span>EVENT FLYER</span><span>KURZFILME</span><span>BOOKING</span>
+      <span>DJ SETS</span><span>POSTERDESIGN</span><span>EVENT FLYER</span><span>KURZFILME</span><span>BOOKING</span>
     </div>
   </div>
 
-  <section id="dj" class="section">
-    <div class="container">
-      <p class="eyebrow">DJ Booking</p>
-      <h2 class="section-title">Buch mich für deinen Gig</h2>
-      <p class="section-lead">
-        Von Clubnächten bis Private Events — ich bringe ein Set mit, das auf euren Anlass
-        zugeschnitten ist. Kurze Absprache, klarer Ablauf, verlässlich vor Ort.
-      </p>
-      <div class="card-grid">
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.6"/></svg>
-          </div>
-          <h3>Genres</h3>
-          <p>Elektronische Sets, angepasst an Location und Publikum.</p>
-          <div class="tag-list">
-            <span class="tag">House</span><span class="tag">Techno</span><span class="tag">Melodic</span>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 12h8M12 8v8"/></svg>
-          </div>
-          <h3>Events</h3>
-          <p>Clubnächte, private Feiern, Firmenevents, Pop-up-Locations.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 18V6l16-2v12"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="16" r="2"/></svg>
-          </div>
-          <h3>Equipment</h3>
-          <p>Spiele mit eigenem oder Location-Equipment — wird vorab abgesprochen.</p>
-        </div>
+  <section id="dj" class="section wrap">
+    <div class="section-head reveal">
+      <div>
+        <p class="section-num">01 / booking</p>
+        <h2>buch mich für deinen gig</h2>
+      </div>
+      <p class="section-note">Clubnächte, private Events, Firmenfeiern — kurze Absprache, verlässlich vor Ort.</p>
+    </div>
+    <div class="dj-grid">
+      <div class="dj-cell reveal">
+        <span class="idx">genres</span>
+        <h3>sound</h3>
+        <p>Elektronische Sets, angepasst an Location und Publikum.</p>
+        <div class="tags"><span>house</span><span>techno</span><span>melodic</span></div>
+      </div>
+      <div class="dj-cell reveal">
+        <span class="idx">wo</span>
+        <h3>events</h3>
+        <p>Clubs, private Feiern, Firmenevents, Pop-up-Locations.</p>
+      </div>
+      <div class="dj-cell reveal">
+        <span class="idx">setup</span>
+        <h3>equipment</h3>
+        <p>Eigenes oder Location-Equipment — wird vorab abgesprochen.</p>
       </div>
     </div>
   </section>
 
-  <section id="design" class="section section-alt">
-    <div class="container">
-      <p class="eyebrow">Posterdesign</p>
-      <h2 class="section-title">Ein Plakat für deinen Gig oder dein Treffen</h2>
-      <p class="section-lead">
-        Du brauchst ein Poster für dein Event, deinen Auftritt oder ein Treffen? Ich gestalte
-        individuelle Designs — von Konzeptidee bis druckfertiger Datei.
-      </p>
-      <div class="poster-grid">
-        <div class="poster-item"><span>Konzert-Poster</span><small>Line-up, Datum, Location</small></div>
-        <div class="poster-item"><span>Event-Flyer</span><small>Digital & Print</small></div>
-        <div class="poster-item"><span>Merch & Cover</span><small>Release-Artwork</small></div>
+  <section id="design" class="section wrap">
+    <div class="section-head reveal">
+      <div>
+        <p class="section-num">02 / design</p>
+        <h2>ein plakat für deinen anlass</h2>
       </div>
+      <p class="section-note">Vom Konzept bis zur druckfertigen Datei — individuell für Gig, Release oder Treffen.</p>
     </div>
-  </section>
-
-  <section id="discography" class="section">
-    <div class="container">
-      <p class="eyebrow">Discography</p>
-      <h2 class="section-title">Meine Musik & Filme</h2>
-      <p class="section-lead">
-        Alles, was ich veröffentliche, sammelt sich hier — aktuelle Sets und Tracks auf
-        SoundCloud, Kurzfilme folgen.
-      </p>
-      <div class="discog-panel">
+    <div class="wall">
+      <div class="poster reveal">
         <div>
-          <h3>Sets & Tracks</h3>
-          <p>Aktuelle Uploads und Mixe auf SoundCloud anhören.</p>
+          <p class="kicker">line-up</p>
+          <h3>konzert-<br />poster</h3>
         </div>
-        <a href="https://on.soundcloud.com/F0CkYpFaCSJcpmijd1" target="_blank" rel="noopener" class="btn btn-primary">Auf SoundCloud hören</a>
+        <div><div class="swatches"><i></i><i></i><i></i></div><small>Datum · Location · Artists</small></div>
       </div>
-      <div class="film-teaser" style="margin-top:24px;">
-        <strong>Kurzfilme — coming soon.</strong>
-        <p style="margin-top:8px;">Aktuell in Arbeit: erste eigene Kurzfilmprojekte. Hier erscheinen die Trailer & Releases, sobald sie fertig sind.</p>
+      <div class="poster reveal">
+        <div>
+          <p class="kicker">digital & print</p>
+          <h3>event-<br />flyer</h3>
+        </div>
+        <div><div class="swatches"><i></i><i></i><i></i></div><small>Story-Format inklusive</small></div>
       </div>
-    </div>
-  </section>
-
-  <section class="section section-alt">
-    <div class="container">
-      <p class="eyebrow center">Ablauf</p>
-      <h2 class="section-title center">So läuft eine Anfrage</h2>
-      <p class="section-lead center">Egal ob Booking oder Design — der Weg zu dir ist kurz.</p>
-      <div class="steps">
-        <div class="step">
-          <span class="step-num">01</span>
-          <h3>Anfrage</h3>
-          <p>Du schreibst mir, was du brauchst — Gig, Poster oder beides.</p>
+      <div class="poster reveal">
+        <div>
+          <p class="kicker">release</p>
+          <h3>merch &<br />cover</h3>
         </div>
-        <div class="step">
-          <span class="step-num">02</span>
-          <h3>Absprache</h3>
-          <p>Wir klären Termin, Umfang und Budget in kurzer Abstimmung.</p>
-        </div>
-        <div class="step">
-          <span class="step-num">03</span>
-          <h3>Umsetzung</h3>
-          <p>Ich spiele dein Set oder gestalte dein Design.</p>
-        </div>
-        <div class="step">
-          <span class="step-num">04</span>
-          <h3>Übergabe</h3>
-          <p>Fertiges Design als Datei, oder ich bin live vor Ort.</p>
-        </div>
+        <div><div class="swatches"><i></i><i></i><i></i></div><small>Artwork für Releases</small></div>
       </div>
     </div>
   </section>
 
-  <section id="ueber" class="section">
-    <div class="container about-inner">
-      <div class="about-text">
-        <p class="eyebrow">Über mich</p>
-        <h2 class="section-title">flomado.</h2>
-        <p class="section-lead" style="margin-bottom:0;">
-          Musik, Design und bewegte Bilder sind für mich ein und dasselbe Handwerk — nur mit
-          anderen Werkzeugen. Als DJ bringe ich Sets auf die Bühne, als Grafiker gestalte ich
-          die Poster dazu, und aktuell arbeite ich daran, meine ersten eigenen Kurzfilme zu
-          drehen.
-        </p>
-        <ul class="check-list">
-          <li>Verlässlich buchbar für DJ-Sets</li>
-          <li>Individuelles Posterdesign für Events & Releases</li>
-          <li>Eigene Musik- und Film-Uploads an einem Ort</li>
-        </ul>
+  <section id="discography" class="section wrap">
+    <div class="section-head reveal">
+      <div>
+        <p class="section-num">03 / discography</p>
+        <h2>meine musik & filme</h2>
       </div>
-      <div class="about-visual">
-        <div class="stat-card"><span class="stat-num">01</span><span class="stat-label">Alter Ego, ein Portfolio</span></div>
-        <div class="stat-card"><span class="stat-num">∞</span><span class="stat-label">Ideen für Sets & Designs</span></div>
-        <div class="stat-card"><span class="stat-num">2026</span><span class="stat-label">Erste Kurzfilme in Arbeit</span></div>
+      <p class="section-note">Aktuelle Sets und Tracks auf SoundCloud, Kurzfilme folgen.</p>
+    </div>
+    <div class="reel reveal">
+      <a class="reel-frame link" href="https://on.soundcloud.com/F0CkYpFaCSJcpmijd1" target="_blank" rel="noopener">
+        <span class="play">▶</span>
+        <div><h4>sets & tracks</h4><span>auf soundcloud hören</span></div>
+      </a>
+      <div class="reel-frame soon">
+        <strong>kurzfilme</strong>
+        <span>coming soon — erste eigene Projekte in Arbeit</span>
       </div>
     </div>
   </section>
 
-  <section id="kontakt" class="section section-alt">
-    <div class="container kontakt-inner">
-      <p class="eyebrow">Kontakt</p>
-      <h2 class="section-title">Lass uns was zusammen machen</h2>
-      <p class="section-lead">Ob Booking-Anfrage oder Posterauftrag — schreib mir kurz, worum es geht.</p>
+  <section id="ueber" class="section wrap about">
+    <p class="pull-quote reveal">
+      Musik, Design und bewegte Bilder sind für mich <span>ein und dasselbe Handwerk</span> —
+      nur mit anderen Werkzeugen.
+    </p>
+    <div class="about-stats reveal">
+      <div><span>alter ego, ein portfolio</span><b>01</b></div>
+      <div><span>ideen für sets & designs</span><b>∞</b></div>
+      <div><span>erste kurzfilme in arbeit</span><b>2026</b></div>
+    </div>
+  </section>
+
+  <section id="kontakt" class="section wrap">
+    <div class="contact reveal">
+      <div class="contact-head">
+        <p class="section-num">04 / kontakt</p>
+        <h2>lass uns was zusammen machen</h2>
+        <p>Ob Booking-Anfrage oder Posterauftrag — schreib mir kurz, worum es geht.</p>
+      </div>
       <form class="contact-form" id="contact-form">
-        <div class="form-row">
-          <label>Name
-            <input type="text" name="name" required />
-          </label>
-          <label>E-Mail
-            <input type="email" name="email" required />
-          </label>
-        </div>
-        <label>Worum geht's?
+        <label>Name
+          <input type="text" name="name" placeholder="Dein Name" required />
+        </label>
+        <label>E-Mail
+          <input type="email" name="email" placeholder="du@beispiel.de" required />
+        </label>
+        <label class="full">Worum geht's?
           <select name="kind">
             <option>DJ Booking</option>
             <option>Posterdesign</option>
             <option>Sonstiges</option>
           </select>
         </label>
-        <label>Nachricht
-          <textarea name="message" rows="5" required></textarea>
+        <label class="full">Nachricht
+          <textarea name="message" rows="4" placeholder="Erzähl mir von deinem Anlass …" required></textarea>
         </label>
-        <button type="submit" class="btn btn-primary">Anfrage senden</button>
+        <button type="submit" class="btn btn-outline">anfrage senden</button>
         <p class="form-note" id="form-note"></p>
       </form>
     </div>
@@ -223,19 +176,15 @@
 
 </main>
 
-<footer class="site-footer">
-  <div class="container footer-inner">
-    <span>© <span id="year"></span> flomado.</span>
-    <span>
-      <a href="https://on.soundcloud.com/F0CkYpFaCSJcpmijd1" target="_blank" rel="noopener">SoundCloud</a>
-      · <a href="#kontakt">Kontakt</a>
-    </span>
+<footer class="fl-footer wrap">
+  <span>© <span id="year"></span> flomado.</span>
+  <div class="footer-links">
+    <a href="https://on.soundcloud.com/F0CkYpFaCSJcpmijd1" target="_blank" rel="noopener">soundcloud</a>
+    <a href="#kontakt">kontakt</a>
   </div>
 </footer>
 
-<script src="vendor/three.min.js"></script>
-<script src="js/background.js"></script>
-<script src="js/hero-orb.js"></script>
+<script src="js/vinyl.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

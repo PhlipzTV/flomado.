@@ -1,59 +1,53 @@
 document.getElementById("year").textContent = new Date().getFullYear();
 
-// Mobile nav toggle
-const navToggle = document.querySelector(".nav-toggle");
-const mainNav = document.querySelector(".main-nav");
-if (navToggle && mainNav) {
-  navToggle.addEventListener("click", () => {
-    const isOpen = mainNav.classList.toggle("is-open");
-    navToggle.setAttribute("aria-expanded", String(isOpen));
-    mainNav.style.display = isOpen ? "flex" : "";
-    if (isOpen) {
-      mainNav.style.position = "absolute";
-      mainNav.style.top = "76px";
-      mainNav.style.left = "0";
-      mainNav.style.right = "0";
-      mainNav.style.flexDirection = "column";
-      mainNav.style.padding = "20px 24px";
-      mainNav.style.background = "rgba(7,5,10,0.97)";
-      mainNav.style.borderBottom = "1px solid rgba(255,255,255,0.08)";
+// Mobile nav
+const burger = document.querySelector(".fl-burger");
+const links = document.querySelector(".fl-links");
+if (burger && links) {
+  burger.addEventListener("click", () => {
+    const open = links.classList.toggle("is-open");
+    burger.setAttribute("aria-expanded", String(open));
+    links.style.display = open ? "flex" : "";
+    if (open) {
+      links.style.position = "fixed";
+      links.style.top = "68px";
+      links.style.left = "0";
+      links.style.right = "0";
+      links.style.flexDirection = "column";
+      links.style.gap = "18px";
+      links.style.padding = "24px";
+      links.style.background = "#0a0908";
+      links.style.borderBottom = "2px solid rgba(244,236,223,0.14)";
     }
   });
-  mainNav.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      mainNav.classList.remove("is-open");
-      mainNav.removeAttribute("style");
-      navToggle.setAttribute("aria-expanded", "false");
+  links.querySelectorAll("a").forEach((a) => {
+    a.addEventListener("click", () => {
+      links.classList.remove("is-open");
+      links.removeAttribute("style");
     });
   });
 }
 
-// Reveal-on-scroll for cards, steps, stats, posters
-const revealTargets = document.querySelectorAll(
-  ".card, .step, .stat-card, .about-text, .about-visual, .poster-item, .discog-panel, .film-teaser"
-);
+// Reveal on scroll
+const revealEls = document.querySelectorAll(".reveal");
 if ("IntersectionObserver" in window) {
-  revealTargets.forEach((el) => {
-    el.style.opacity = "0";
-    el.style.transform = "translateY(18px)";
-    el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
-  });
   const io = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.style.opacity = "1";
-          entry.target.style.transform = "translateY(0)";
+          entry.target.classList.add("in");
           io.unobserve(entry.target);
         }
       });
     },
-    { threshold: 0.15 }
+    { threshold: 0.12 }
   );
-  revealTargets.forEach((el) => io.observe(el));
+  revealEls.forEach((el) => io.observe(el));
+} else {
+  revealEls.forEach((el) => el.classList.add("in"));
 }
 
-// Booking form (no backend — opens a pre-filled email as fallback)
+// Booking form -> mailto fallback
 const form = document.getElementById("contact-form");
 const note = document.getElementById("form-note");
 if (form) {
