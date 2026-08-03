@@ -234,6 +234,28 @@
   .copy-btn:hover{border-color:var(--blaze);color:var(--blaze);}
   .copy-btn.is-copied{border-color:var(--blaze);color:var(--blaze);}
 
+  .mail-template{
+    margin:2.4rem auto 0;max-width:640px;text-align:left;
+    background:var(--ink-2);border:1px solid rgba(241,233,216,.14);padding:1.8rem 1.8rem 2rem;
+  }
+  .mail-template__intro{font-size:.88rem;color:var(--text-paper-muted);margin:0;}
+  .mail-template__row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+  @media (max-width:560px){.mail-template__row{grid-template-columns:1fr;}}
+  .mail-template label{
+    display:flex;flex-direction:column;gap:.4rem;margin-top:1.1rem;
+    font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text-paper-muted);
+  }
+  .mail-template input,.mail-template select,.mail-template textarea{
+    font-family:var(--font-body);font-size:.95rem;color:var(--text-paper);
+    background:rgba(241,233,216,.05);border:1px solid rgba(241,233,216,.18);padding:.6rem .7rem;resize:vertical;
+  }
+  .mail-template input:focus,.mail-template select:focus,.mail-template textarea:focus{outline:none;border-color:var(--blaze);}
+  .mail-template__output-label{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+  .mail-template__output{
+    width:100%;margin-top:.4rem;font-family:var(--font-mono);font-size:.8rem;line-height:1.5;
+    background:rgba(0,0,0,.28);color:var(--text-paper-muted);white-space:pre-wrap;
+  }
+
   footer{background:var(--ink);color:var(--text-paper-muted);padding:2.4rem 0;font-family:var(--font-mono);font-size:.78rem;}
   .footer__row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;align-items:center;}
   .footer__links a{color:var(--text-paper-muted);margin-left:1rem;transition:color .2s;}
@@ -461,6 +483,39 @@
         <span>Öffnet sich kein Mailprogramm? Schreib direkt an <a href="mailto:florian@dobrick.net">florian@dobrick.net</a></span>
         <button type="button" class="copy-btn" id="copy-email" data-email="florian@dobrick.net">Adresse kopieren</button>
       </p>
+
+      <div class="mail-template reveal">
+        <p class="mail-template__intro">Oder: Felder ausfüllen, Vorlage kopieren und selbst in dein Mailprogramm/Webmail einfügen.</p>
+
+        <div class="mail-template__row">
+          <label>Dein Name
+            <input type="text" id="mt-name" placeholder="Max Mustermann">
+          </label>
+          <label>Deine E-Mail
+            <input type="email" id="mt-email" placeholder="du@beispiel.de">
+          </label>
+        </div>
+
+        <label>Worum geht's?
+          <select id="mt-subject">
+            <option value="DJ-Anfrage">DJ-Anfrage</option>
+            <option value="Poster-Anfrage">Poster-Anfrage</option>
+            <option value="Sonstiges">Sonstiges</option>
+          </select>
+        </label>
+
+        <label>Nachricht
+          <textarea id="mt-message" rows="4" placeholder="Erzähl mir von deinem Anlass …"></textarea>
+        </label>
+
+        <label>
+          <span class="mail-template__output-label">
+            <span>Fertige Vorlage</span>
+            <button type="button" class="copy-btn" id="mt-copy">Vorlage kopieren</button>
+          </span>
+          <textarea class="mail-template__output" id="mt-output" rows="8" readonly onclick="this.select()"></textarea>
+        </label>
+      </div>
     </div>
   </section>
 </main>
@@ -548,25 +603,61 @@
     }, 2400);
   }
 
+  function copyToClipboard(text, btn, defaultLabel){
+    var done = function(){
+      btn.textContent = 'Kopiert!';
+      btn.classList.add('is-copied');
+      setTimeout(function(){
+        btn.textContent = defaultLabel;
+        btn.classList.remove('is-copied');
+      }, 2000);
+    };
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done).catch(function(){
+        window.prompt('Manuell kopieren:', text);
+      });
+    } else {
+      window.prompt('Manuell kopieren:', text);
+    }
+  }
+
   var copyBtn = document.getElementById('copy-email');
   if(copyBtn){
     copyBtn.addEventListener('click', function(){
-      var email = copyBtn.dataset.email;
-      var done = function(){
-        copyBtn.textContent = 'Kopiert!';
-        copyBtn.classList.add('is-copied');
-        setTimeout(function(){
-          copyBtn.textContent = 'Adresse kopieren';
-          copyBtn.classList.remove('is-copied');
-        }, 2000);
-      };
-      if(navigator.clipboard && navigator.clipboard.writeText){
-        navigator.clipboard.writeText(email).then(done).catch(function(){
-          window.prompt('Adresse manuell kopieren:', email);
-        });
-      } else {
-        window.prompt('Adresse manuell kopieren:', email);
-      }
+      copyToClipboard(copyBtn.dataset.email, copyBtn, 'Adresse kopieren');
+    });
+  }
+
+  // Fill-in email template — for visitors whose browser has no mailto handler.
+  var mtName = document.getElementById('mt-name');
+  var mtEmail = document.getElementById('mt-email');
+  var mtSubject = document.getElementById('mt-subject');
+  var mtMessage = document.getElementById('mt-message');
+  var mtOutput = document.getElementById('mt-output');
+  var mtCopyBtn = document.getElementById('mt-copy');
+
+  function buildTemplate(){
+    var name = (mtName.value || '[Dein Name]');
+    var email = (mtEmail.value || '[deine@email.de]');
+    var subject = mtSubject.value;
+    var message = (mtMessage.value || '[Erzähl mir von deinem Anlass …]');
+    return 'An: florian@dobrick.net\n'
+      + 'Betreff: ' + subject + ' von ' + name + '\n\n'
+      + 'Hi flomado,\n\n'
+      + message + '\n\n'
+      + '— ' + name + ' (' + email + ')';
+  }
+
+  if(mtOutput){
+    var updateTemplate = function(){ mtOutput.value = buildTemplate(); };
+    [mtName, mtEmail, mtSubject, mtMessage].forEach(function(el){
+      el.addEventListener('input', updateTemplate);
+      el.addEventListener('change', updateTemplate);
+    });
+    updateTemplate();
+
+    mtCopyBtn.addEventListener('click', function(){
+      copyToClipboard(mtOutput.value, mtCopyBtn, 'Vorlage kopieren');
     });
   }
 
