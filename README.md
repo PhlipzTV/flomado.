@@ -24,6 +24,3 @@ Unter `editor/index.html` (bei laufendem lokalen Server: `http://localhost:8000/
 
 ## Mit GitHub Pages veröffentlichen
 Nach dem Push: Repo-Settings → Pages → Branch `main`, Ordner `/ (root)` auswählen. Die Seite ist danach unter `https://<dein-username>.github.io/flomado/` erreichbar.
-
-## Noch zu ersetzen
-- Kontakt-Mailadresse (aktuell Platzhalter: hallo@flomado-example.com)
