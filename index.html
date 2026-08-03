@@ -225,6 +225,14 @@
   .contact .section__title{color:var(--text-paper);}
   .contact .section__text{color:var(--text-paper-muted);margin-inline:auto;}
   .contact__ctas{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2rem;}
+  .contact__fallback{margin-top:1.6rem;font-family:var(--font-mono);font-size:.85rem;color:var(--text-paper-muted);
+    display:flex;gap:.7rem;align-items:center;justify-content:center;flex-wrap:wrap;}
+  .contact__fallback a{color:var(--text-paper);text-decoration:underline;text-underline-offset:3px;}
+  .contact__fallback a:hover{color:var(--blaze);}
+  .copy-btn{border:1px solid var(--text-paper-muted);color:var(--text-paper-muted);padding:.3rem .7rem;font-family:inherit;font-size:.75rem;
+    text-transform:uppercase;letter-spacing:.04em;transition:border-color .2s,color .2s;}
+  .copy-btn:hover{border-color:var(--blaze);color:var(--blaze);}
+  .copy-btn.is-copied{border-color:var(--blaze);color:var(--blaze);}
 
   footer{background:var(--ink);color:var(--text-paper-muted);padding:2.4rem 0;font-family:var(--font-mono);font-size:.78rem;}
   .footer__row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;align-items:center;}
@@ -449,6 +457,10 @@
         <a href="mailto:florian@dobrick.net?subject=DJ-Anfrage" class="btn btn--solid magnetic">DJ-Anfrage senden</a>
         <a href="mailto:florian@dobrick.net?subject=Poster-Anfrage" class="btn btn--outline magnetic">Poster-Anfrage senden</a>
       </div>
+      <p class="contact__fallback reveal">
+        <span>Öffnet sich kein Mailprogramm? Schreib direkt an <a href="mailto:florian@dobrick.net">florian@dobrick.net</a></span>
+        <button type="button" class="copy-btn" id="copy-email" data-email="florian@dobrick.net">Adresse kopieren</button>
+      </p>
     </div>
   </section>
 </main>
@@ -534,6 +546,28 @@
       roleWrap.appendChild(next);
       setTimeout(function(){ old.remove(); }, 550);
     }, 2400);
+  }
+
+  var copyBtn = document.getElementById('copy-email');
+  if(copyBtn){
+    copyBtn.addEventListener('click', function(){
+      var email = copyBtn.dataset.email;
+      var done = function(){
+        copyBtn.textContent = 'Kopiert!';
+        copyBtn.classList.add('is-copied');
+        setTimeout(function(){
+          copyBtn.textContent = 'Adresse kopieren';
+          copyBtn.classList.remove('is-copied');
+        }, 2000);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(email).then(done).catch(function(){
+          window.prompt('Adresse manuell kopieren:', email);
+        });
+      } else {
+        window.prompt('Adresse manuell kopieren:', email);
+      }
+    });
   }
 
   var io = new IntersectionObserver(function(entries){
