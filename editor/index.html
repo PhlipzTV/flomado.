@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>flomado. — Baukasten</title>
+<link rel="stylesheet" href="vendor/grapes.min.css">
+<style>
+  :root{ --blaze:#ff4315; --ink:#15110d; --paper:#ede3ce; }
+  *{box-sizing:border-box;}
+  html,body{margin:0;height:100%;background:#0c0a08;color:#ede3ce;font-family:system-ui,sans-serif;}
+  .topbar{
+    display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+    padding:12px 18px;background:#15110d;border-bottom:1px solid #332a1f;
+  }
+  .topbar h1{font-size:15px;margin:0;font-weight:700;letter-spacing:.02em;}
+  .topbar h1 span{color:var(--blaze);}
+  .topbar p{margin:0;font-size:12.5px;color:#a89f8f;flex:1 1 260px;}
+  .topbar button{
+    font-family:inherit;font-size:12.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;
+    border:none;padding:9px 16px;cursor:pointer;background:var(--blaze);color:var(--ink);
+  }
+  .topbar button.ghost{background:transparent;color:#ede3ce;border:1px solid #4a4034;}
+  .topbar button:hover{opacity:.88;}
+  #status{font-size:12px;color:#a89f8f;}
+  #editor-wrap{height:calc(100% - 54px);}
+  #gjs{height:100%;}
+  .gjs-block{min-height:auto;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <h1>flomado<span>.</span> — baukasten</h1>
+  <p>Elemente per Drag &amp; Drop (Canvas oder Ebenen-Panel rechts) verschieben. Nur die Reihenfolge/Position ändert sich — Design &amp; Skripte bleiben beim Export unverändert.</p>
+  <span id="status"></span>
+  <button class="ghost" id="reload-btn" type="button">Neu laden (verwerfen)</button>
+  <button id="export-btn" type="button">Exportieren &amp; herunterladen</button>
+</div>
+
+<div id="editor-wrap"><div id="gjs"></div></div>
+
+<script src="vendor/grapes.min.js"></script>
+<script>
+(function(){
+  var statusEl = document.getElementById('status');
+  var SOURCE_URL = '../index.html';
+
+  window.editor = null; // exposed for scripting/debugging in the browser console
+  var editor = grapesjs.init({
+    container: '#gjs',
+    height: '100%',
+    fromElement: false,
+    storageManager: false,
+    canvas: { styles: [] },
+  });
+  window.editor = editor;
+
+  var originalHead = '', originalHeader = '', originalFooter = '', originalScript = '', pageTitle = 'flomado. — DJ, Posterdesign & Film';
+
+  function extract(html, re){ var m = html.match(re); return (m && m[1] !== undefined) ? m[1] : ''; }
+  function extractWhole(html, re){ var m = html.match(re); return m ? m[0] : ''; }
+
+  function loadSource(){
+    statusEl.textContent = 'Lade ' + SOURCE_URL + ' …';
+    fetch(SOURCE_URL, { cache: 'no-store' }).then(function(res){
+      if(!res.ok) throw new Error('HTTP ' + res.status);
+      return res.text();
+    }).then(function(html){
+      originalHead = extract(html, /<head>([\s\S]*?)<\/head>/i);
+      originalHeader = extractWhole(html, /<header[\s\S]*?<\/header>/i);
+      originalFooter = extractWhole(html, /<footer[\s\S]*?<\/footer>/i);
+      originalScript = extractWhole(html, /<script>[\s\S]*?<\/script>/i);
+      var titleMatch = html.match(/<title>([\s\S]*?)<\/title>/i);
+      if(titleMatch) pageTitle = titleMatch[1];
+
+      var mainInner = extract(html, /<main[^>]*id="top"[^>]*>([\s\S]*?)<\/main>/i);
+      if(!mainInner) mainInner = extract(html, /<main[^>]*>([\s\S]*?)<\/main>/i);
+
+      var styleCss = extract(html, /<style>([\s\S]*?)<\/style>/i);
+
+      editor.setComponents(mainInner);
+
+      // Inject the real site CSS straight into the canvas DOM (bypassing
+      // GrapesJS's own CSS parser/model) so :root vars, @keyframes and
+      // nested selectors render exactly like the live page.
+      var doc = editor.Canvas.getDocument();
+      var styleEl = doc.createElement('style');
+      styleEl.textContent = styleCss + '\n.reveal{opacity:1!important;transform:none!important;}\nbody{overflow:visible!important;}';
+      doc.head.appendChild(styleEl);
+
+      statusEl.textContent = 'Geladen — bereit zum Verschieben.';
+    }).catch(function(err){
+      statusEl.textContent = 'Fehler beim Laden: ' + err.message + ' — läuft die Seite über einen lokalen Server (z. B. python3 -m http.server) statt über file://?';
+    });
+  }
+
+  document.getElementById('reload-btn').addEventListener('click', function(){
+    if(confirm('Alle unexportierten Änderungen verwerfen und neu laden?')) loadSource();
+  });
+
+  document.getElementById('export-btn').addEventListener('click', function(){
+    // GrapesJS serializes its root wrapper component as a <body> tag —
+    // strip it since we're nesting this markup inside our own <main>.
+    var mainHtml = editor.getHtml()
+      .replace(/^\s*<body[^>]*>/i, '')
+      .replace(/<\/body>\s*$/i, '');
+    var full = '<!DOCTYPE html>\n<html lang="de">\n<head>\n' + originalHead + '\n</head>\n<body>\n'
+      + '<div class="grain"></div>\n<div class="cursor" id="cursor" aria-hidden="true"></div>\n\n'
+      + originalHeader + '\n\n'
+      + '<main id="top">\n' + mainHtml + '\n</main>\n\n'
+      + originalFooter + '\n\n'
+      + originalScript + '\n'
+      + '</body>\n</html>\n';
+
+    var blob = new Blob([full], { type: 'text/html' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'index.html';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    statusEl.textContent = 'index.html heruntergeladen — bitte damit die bestehende Datei ersetzen und pushen (lassen).';
+  });
+
+  loadSource();
+})();
+</script>
+</body>
+</html>
