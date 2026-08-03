@@ -53,6 +53,10 @@
     fromElement: false,
     storageManager: false,
     canvas: { styles: [] },
+    // GrapesJS defaults to loading its toolbar icon font from a CDN
+    // (cdnjs.cloudflare.com) — vendor it locally instead so the editor
+    // works fully offline / behind restrictive networks.
+    cssIcons: 'vendor/font-awesome/css/font-awesome.min.css',
   });
   window.editor = editor;
 
