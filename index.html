@@ -261,6 +261,27 @@
     background:rgba(241,233,216,.05);border:1px solid rgba(241,233,216,.18);padding:.6rem .7rem;resize:vertical;
   }
   .mail-template input:focus,.mail-template select:focus,.mail-template textarea:focus{outline:none;border-color:var(--blaze);}
+  .mail-template select{width:100%;}
+
+  /* Animated floating-label fields (name/email/message) */
+  .field{position:relative;margin-top:1.1rem;}
+  .mail-template .field label{
+    display:block;position:absolute;left:.7rem;top:1.05rem;margin:0;
+    font-family:var(--font-mono);font-size:.85rem;text-transform:none;letter-spacing:normal;
+    color:var(--text-paper-muted);pointer-events:none;transform-origin:left top;
+    transition:transform .25s cubic-bezier(.2,.8,.2,1),color .25s ease;
+  }
+  .field input,.field textarea{width:100%;padding:1.15rem .7rem .5rem;transition:border-color .25s ease;}
+  .field input:focus + label,
+  .field input:not(:placeholder-shown) + label,
+  .field textarea:focus + label,
+  .field textarea:not(:placeholder-shown) + label{
+    transform:translateY(-.7rem) scale(.76);
+    color:var(--blaze);
+  }
+  @media (prefers-reduced-motion:reduce){
+    .mail-template .field label,.field input,.field textarea{transition:none;}
+  }
   .mail-template__output-label{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
   .mail-template__output{
     width:100%;margin-top:.4rem;font-family:var(--font-mono);font-size:.8rem;line-height:1.5;
@@ -543,12 +564,14 @@
         <p class="mail-template__intro">Oder: Felder ausfüllen, Vorlage kopieren und selbst in dein Mailprogramm/Webmail einfügen.</p>
 
         <div class="mail-template__row">
-          <label>Dein Name
-            <input type="text" id="mt-name" placeholder="Max Mustermann">
-          </label>
-          <label>Deine E-Mail
-            <input type="email" id="mt-email" placeholder="du@beispiel.de">
-          </label>
+          <div class="field">
+            <input type="text" id="mt-name" placeholder=" " aria-label="Dein Name" autocomplete="name">
+            <label for="mt-name">Dein Name</label>
+          </div>
+          <div class="field">
+            <input type="email" id="mt-email" placeholder=" " aria-label="Deine E-Mail" autocomplete="email">
+            <label for="mt-email">Deine E-Mail</label>
+          </div>
         </div>
 
         <label>Worum geht's?
@@ -559,9 +582,10 @@
           </select>
         </label>
 
-        <label>Nachricht
-          <textarea id="mt-message" rows="4" placeholder="Erzähl mir von deinem Anlass …"></textarea>
-        </label>
+        <div class="field">
+          <textarea id="mt-message" rows="4" placeholder=" " aria-label="Nachricht"></textarea>
+          <label for="mt-message">Nachricht</label>
+        </div>
 
         <label>
           <span class="mail-template__output-label">
