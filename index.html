@@ -81,7 +81,7 @@
   .nav__cta{
     font-family:var(--font-mono);font-size:.78rem;letter-spacing:.04em;text-transform:uppercase;
     background:var(--blaze);color:var(--ink);padding:.55rem 1.1rem;font-weight:700;display:inline-block;
-    transition:transform .25s cubic-bezier(.22,1,.36,1);
+    transition:transform .45s cubic-bezier(.22,1,.36,1);
   }
   @media (max-width:720px){.nav__links{display:none;}}
 
@@ -125,7 +125,7 @@
   .hero__ctas{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:2.2rem;}
   .btn{font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.04em;font-size:.85rem;font-weight:700;
     padding:.9rem 1.6rem;display:inline-flex;align-items:center;gap:.5rem;
-    transition:background .2s,color .2s,border-color .2s,transform .25s cubic-bezier(.22,1,.36,1);}
+    transition:background .2s,color .2s,border-color .2s,transform .45s cubic-bezier(.22,1,.36,1);}
   .btn--solid{background:var(--blaze);color:var(--ink);}
   .btn--solid:hover{background:var(--text-paper);}
   .btn--outline{border:2px solid var(--text-paper-muted);color:var(--text-paper);}
@@ -142,7 +142,7 @@
   .marquee__group{display:flex;flex-shrink:0;}
   .marquee__group span{font-family:var(--font-mono);font-weight:700;text-transform:uppercase;letter-spacing:.05em;
     font-size:1rem;color:var(--ink);padding:0 1.2rem;white-space:nowrap;}
-  @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-16.6667%);}}
 
   /* sections */
   .section{padding:7rem 0;}
@@ -278,7 +278,7 @@
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
     .marquee__track{animation:none;}
-    .marquee__group:nth-child(2){display:none;}
+    .marquee__group:not(:first-child){display:none;}
     .vinyl{animation:none;}
     .eq span{animation:none;}
     .hero__scroll{animation:none;}
@@ -324,6 +324,18 @@
 
   <div class="marquee" aria-hidden="true">
     <div class="marquee__track">
+      <div class="marquee__group">
+        <span>DJ-Sets buchen</span><span>✦</span><span>Poster &amp; Flyer Design</span><span>✦</span><span>Kurzfilme ab 2027</span><span>✦</span><span>Jetzt anfragen</span><span>✦</span>
+      </div>
+      <div class="marquee__group">
+        <span>DJ-Sets buchen</span><span>✦</span><span>Poster &amp; Flyer Design</span><span>✦</span><span>Kurzfilme ab 2027</span><span>✦</span><span>Jetzt anfragen</span><span>✦</span>
+      </div>
+      <div class="marquee__group">
+        <span>DJ-Sets buchen</span><span>✦</span><span>Poster &amp; Flyer Design</span><span>✦</span><span>Kurzfilme ab 2027</span><span>✦</span><span>Jetzt anfragen</span><span>✦</span>
+      </div>
+      <div class="marquee__group">
+        <span>DJ-Sets buchen</span><span>✦</span><span>Poster &amp; Flyer Design</span><span>✦</span><span>Kurzfilme ab 2027</span><span>✦</span><span>Jetzt anfragen</span><span>✦</span>
+      </div>
       <div class="marquee__group">
         <span>DJ-Sets buchen</span><span>✦</span><span>Poster &amp; Flyer Design</span><span>✦</span><span>Kurzfilme ab 2027</span><span>✦</span><span>Jetzt anfragen</span><span>✦</span>
       </div>
