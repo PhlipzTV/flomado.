@@ -73,8 +73,8 @@
     transition:background .3s, backdrop-filter .3s;
   }
   .nav.is-scrolled{background:rgba(21,17,13,.88);backdrop-filter:blur(6px);}
-  .nav__logo{font-family:var(--font-mono);font-weight:700;letter-spacing:.06em;color:var(--text-paper);font-size:.95rem;}
-  .nav__logo span{color:var(--blaze);}
+  .nav__logo{display:flex;align-items:center;}
+  .nav__logo img{height:34px;width:auto;display:block;}
   .nav__links{display:flex;gap:1.6rem;}
   .nav__links a{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.04em;color:var(--text-paper-muted);text-transform:uppercase;transition:color .2s;}
   .nav__links a:hover{color:var(--blaze);}
@@ -290,7 +290,7 @@
 <div class="cursor" id="cursor" aria-hidden="true"></div>
 
 <header class="nav" id="nav">
-  <a href="#top" class="nav__logo">flomado. <span>✦</span></a>
+  <a href="#top" class="nav__logo"><img src="images/logo-flomado-white.png" alt="flomado."></a>
   <nav class="nav__links">
     <a href="#buchen">Buchen</a>
     <a href="#werke">Werke</a>
@@ -420,38 +420,45 @@
       </div>
 
       <div class="wall-group">
-        <h3 class="wall-group__title reveal">— Poster —</h3>
+        <h3 class="wall-group__title reveal">— Poster, Cover & Flyer —</h3>
         <div class="wall">
           <div class="flyer tilt reveal" style="--r:4deg">
             <p class="flyer__eyebrow">Poster</p>
             <h3 class="flyer__title">Open Air 2025</h3>
             <p class="flyer__meta">A2 · für ein lokales Kollektiv</p>
           </div>
-          <div class="flyer flyer--tape tilt reveal" style="--r:-4deg">
-            <p class="flyer__eyebrow">Poster</p>
-            <h3 class="flyer__title">Klubnacht #12</h3>
-            <p class="flyer__meta">A1 · Riso-Druck</p>
+          <div class="flyer flyer--album flyer--tape tilt reveal" style="--r:-4deg">
+            <img class="flyer__cover" src="images/cover-blueg-billity-greed.jpg" alt="Cover: BlueG x Billity x Greed" loading="lazy">
+            <p class="flyer__eyebrow">Cover</p>
+            <h3 class="flyer__title">BlueG x Billity x Greed</h3>
+            <p class="flyer__meta">Cover-Design</p>
           </div>
-          <div class="flyer flyer--tape tilt reveal" style="--r:-2deg">
-            <p class="flyer__eyebrow">Poster</p>
-            <h3 class="flyer__title">Einladung — S.</h3>
-            <p class="flyer__meta">Digitaldruck · A5</p>
+          <div class="flyer flyer--album flyer--tape tilt reveal" style="--r:-2deg">
+            <img class="flyer__cover" src="images/flyer-bve-heidenheim.jpg" alt="Flyer: BVE Heidenheim – 4 Profile" loading="lazy">
+            <p class="flyer__eyebrow">Flyer</p>
+            <h3 class="flyer__title">BVE Heidenheim</h3>
+            <p class="flyer__meta">Flyer · 4 Profile</p>
           </div>
         </div>
       </div>
 
       <div class="wall-group">
-        <h3 class="wall-group__title reveal">— Filme —</h3>
+        <h3 class="wall-group__title reveal">— Vergangene Auftritte —</h3>
         <div class="wall">
           <div class="flyer tilt reveal" style="--r:-5deg">
-            <p class="flyer__eyebrow">Film</p>
-            <h3 class="flyer__title">Erster Schnitt</h3>
-            <p class="flyer__meta">Kurzfilm · in Produktion · 2027</p>
+            <p class="flyer__eyebrow">Auftritt</p>
+            <h3 class="flyer__title">Abiball 2024</h3>
+            <p class="flyer__meta">DJ-Set</p>
           </div>
           <div class="flyer flyer--tape tilt reveal" style="--r:5deg">
-            <p class="flyer__eyebrow">Film</p>
-            <h3 class="flyer__title">Ohne Titel #1</h3>
-            <p class="flyer__meta">Konzept · in Entwicklung</p>
+            <p class="flyer__eyebrow">Auftritt</p>
+            <h3 class="flyer__title">Hochzeit 2025</h3>
+            <p class="flyer__meta">DJ-Set</p>
+          </div>
+          <div class="flyer flyer--tape tilt reveal" style="--r:-3deg">
+            <p class="flyer__eyebrow">Auftritt</p>
+            <h3 class="flyer__title">Populärbar Heidenheim</h3>
+            <p class="flyer__meta">DJ-Set</p>
           </div>
         </div>
       </div>
@@ -491,7 +498,8 @@
         </p>
         <div class="about__tags">
           <span class="tag">Techno</span><span class="tag">House</span><span class="tag">Electro</span>
-          <span class="tag">Riso-Druck</span><span class="tag">Typografie</span><span class="tag">Film — ab 2027</span>
+          <span class="tag">Design</span><span class="tag">Typografie</span>
+          <span class="tag">Theaterbegeistert</span><span class="tag">Kurzfilme (ab 2027)</span>
         </div>
       </div>
       <div class="reveal about__photo">
