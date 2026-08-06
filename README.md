@@ -23,4 +23,17 @@ Unter `editor/index.html` (bei laufendem lokalen Server: `http://localhost:8000/
 - Button „Exportieren & herunterladen" lädt eine neue `index.html` herunter — damit die bestehende Datei ersetzen und committen.
 
 ## Mit GitHub Pages veröffentlichen
-Nach dem Push: Repo-Settings → Pages → Branch `main`, Ordner `/ (root)` auswählen. Die Seite ist danach unter `https://<dein-username>.github.io/flomado/` erreichbar.
+Nach dem Push: Repo-Settings → Pages → Branch `main`, Ordner `/ (root)` auswählen. Die Seite ist danach unter `https://phlipztv.github.io/flomado./` erreichbar.
+
+## SEO / Auffindbarkeit
+Vorbereitet für Suchmaschinen:
+- `robots.txt` + `sitemap.xml` (verweisen aktuell auf die GitHub-Pages-URL)
+- Meta-Description, Open-Graph- & Twitter-Card-Tags (fürs Teilen in Social Media/Messengern)
+- `Person`-Structured-Data (JSON-LD) mit Name, Berufen und Social-Links, für bessere Darstellung in Google
+- `favicon.svg`
+
+### Sobald eine eigene Domain eingerichtet ist
+1. In `index.html`, `robots.txt` und `sitemap.xml` **alle** Vorkommen von `https://phlipztv.github.io/flomado./` durch die neue Domain ersetzen (im Kopf von `index.html` steht dazu ein TODO-Kommentar).
+2. Domain in den GitHub-Pages-Einstellungen als "Custom domain" eintragen.
+3. Bei Google Search Console die Domain verifizieren und `sitemap.xml` einreichen.
+4. Link zur Website in Instagram-Bio, SoundCloud-Profil und YouTube-Kanal ergänzen — das bringt oft mehr als alles Technische.
