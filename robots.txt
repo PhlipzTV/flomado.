@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://phlipztv.github.io/flomado./sitemap.xml
+Sitemap: https://flomado.de/sitemap.xml
